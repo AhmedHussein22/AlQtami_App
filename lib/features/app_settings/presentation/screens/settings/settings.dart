@@ -67,14 +67,12 @@ class Settings extends StatelessWidget {
               title: tr(context, "Privacy_policy"),
               onTap: () {
                 AppGloabl.launchURL('https://www.freeprivacypolicy.com/live/d92e5cf3-33f7-4f13-8dc2-2584dcec85ac');
-                //Navigator.pushNamed(context, Routes.privacy);
               },
             ),
             CustomListTile(
               title: tr(context, "Terms_and_Conditions"),
               onTap: () {
                 AppGloabl.launchURL('https://www.app-privacy-policy.com/live.php?token=qfIfJyy8CQb9WLgzCuSOwmIFUJBQQdKa');
-                //Navigator.pushNamed(context, Routes.trems);
               },
               isLast: true,
             ),
