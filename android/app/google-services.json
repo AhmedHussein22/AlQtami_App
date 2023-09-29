@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1025664837778",
+    "project_id": "naser-alqatami-392321",
+    "storage_bucket": "naser-alqatami-392321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025664837778:android:f2640f3ef984b939ce9e4b",
+        "android_client_info": {
+          "package_name": "com.MRcode.Naser_Alqtami"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025664837778-tv4g2ea0n77sr7so6b0bb4ms21q1dbce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MRcode.Naser_Alqtami",
+            "certificate_hash": "d81059ee40de12d4e80c88e139dd5c7992f450fc"
+          }
+        },
+        {
+          "client_id": "1025664837778-fp5svv9fpq6bnnvfkk6vrgpte8dmkufl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuUZsnKcGgBb5gckSgQuvn7LXAFoX0DU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025664837778-fp5svv9fpq6bnnvfkk6vrgpte8dmkufl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
