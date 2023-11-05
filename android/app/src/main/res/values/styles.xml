@@ -15,8 +15,4 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
-    <style name="SplashTheme" parent="@android:style/Theme.NoTitleBar">
-        <item name="android:windowBackground">@drawable/launch_background</item>
-    </style>
-
 </resources>

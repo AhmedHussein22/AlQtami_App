@@ -29,7 +29,7 @@ class QuranLiveState extends State<QuranLive> {
 
   void init() {
     _youtubePlayerController = YoutubePlayerController(
-      initialVideoId: "wEtKchIK3qg",
+      initialVideoId: "Zi158ArXdbg",
       flags: const YoutubePlayerFlags(isLive: true),
     )..addListener(listener);
   }

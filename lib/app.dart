@@ -15,14 +15,14 @@ import 'features/videos_and_photos_media/presentation/cubits/quran_sur/quran_sur
 import 'injection_container.dart';
 import 'utils/app_utils/app_strings.dart';
 
-class QuoteApp extends StatefulWidget {
-  const QuoteApp({Key? key}) : super(key: key);
+class AlqtamiApp extends StatefulWidget {
+  const AlqtamiApp({Key? key}) : super(key: key);
 
   @override
-  State<QuoteApp> createState() => _QuoteAppState();
+  State<AlqtamiApp> createState() => _AlqtamiAppState();
 }
 
-class _QuoteAppState extends State<QuoteApp> {
+class _AlqtamiAppState extends State<AlqtamiApp> {
   @override
   void initState() {
     super.initState();

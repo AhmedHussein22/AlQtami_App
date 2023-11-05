@@ -48,13 +48,14 @@ Future<void> initDI() async {
   // Use cases
   serviceLoctor.registerLazySingleton<GetRandomQuote>(() => GetRandomQuote(quoteRepository: serviceLoctor()));
   serviceLoctor.registerLazySingleton<GetQuranSur>(() => GetQuranSur(quranSurahRepository: serviceLoctor()));
-  serviceLoctor.registerLazySingleton<GetDownloadMedia>(() => GetDownloadMedia( downloadMediaRepository: serviceLoctor()));
+  serviceLoctor.registerLazySingleton<GetDownloadMedia>(() => GetDownloadMedia(downloadMediaRepository: serviceLoctor()));
 
   serviceLoctor.registerLazySingleton<GetSavedLangUseCase>(() => GetSavedLangUseCase(langRepository: serviceLoctor()));
   serviceLoctor.registerLazySingleton<ChangeLangUseCase>(() => ChangeLangUseCase(langRepository: serviceLoctor()));
 
   // Repository
-  serviceLoctor.registerLazySingleton<QuoteRepository>(() => QuoteRepositoryImpl(networkInfo: serviceLoctor(), randomQuoteRemoteDataSource: serviceLoctor(), randomQuoteLocalDataSource: serviceLoctor()));
+  serviceLoctor
+      .registerLazySingleton<QuoteRepository>(() => QuoteRepositoryImpl(networkInfo: serviceLoctor(), randomQuoteRemoteDataSource: serviceLoctor(), randomQuoteLocalDataSource: serviceLoctor()));
   serviceLoctor.registerLazySingleton<QuranSurahRepository>(() => QuranSurRepositoryImpl(networkInfo: serviceLoctor(), quranSurLocalDataSource: serviceLoctor()));
   serviceLoctor.registerLazySingleton<DownloadMediaRepository>(() => DownloadMediaRepositoryImpl(networkInfo: serviceLoctor(), downloadMediaRemoteDataSource: serviceLoctor()));
 

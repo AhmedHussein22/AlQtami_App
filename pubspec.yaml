@@ -42,7 +42,6 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_native_splash: ^2.3.1
   flutter_test:
     sdk: flutter
 
@@ -68,8 +67,8 @@ flutter:
         - asset: assets/fonts/DINNextLTArabic-Bold-4.ttf
           weight: 700
 
-flutter_native_splash:
-  image: assets/images/menu_bg.jpg
-  background_image: assets/images/logo_without_bg.png
-  android: true
-  ios: true
+# flutter_native_splash:
+#   image: assets/images/logo_without_bg.png
+#   background_image: assets/images/menu_bg.jpg
+#   android: true
+#   ios: true
