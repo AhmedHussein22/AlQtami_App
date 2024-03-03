@@ -31,7 +31,7 @@ dependencies:
   get_it: ^7.6.0
   internet_connection_checker: ^1.0.0+1
   just_audio: ^0.9.34
-  logger: ^1.4.0
+  
   path_provider: ^2.0.15
   share_plus: ^7.0.2
   shared_preferences: ^2.1.2
@@ -42,6 +42,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+  logger: ^1.4.0
   flutter_test:
     sdk: flutter
 
@@ -56,16 +57,22 @@ flutter:
     - assets/json/
 
   fonts:
-    - family: Din
+    - family: Cairo
       fonts:
-        - asset: assets/fonts/DINNEXTLTARABIC-LIGHT-2-2.ttf
-          weight: 300
-        - asset: assets/fonts/DINNextLTArabic-Medium-4.ttf
-          weight: 400
-        - asset: assets/fonts/DINNextLTArabic-Regular-4.ttf
-          weight: 500
-        - asset: assets/fonts/DINNextLTArabic-Bold-4.ttf
-          weight: 700
+        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: assets/fonts/Cairo-Regular.ttf
+
+
+
+
+
+
+
+
+
 
 # flutter_native_splash:
 #   image: assets/images/logo_without_bg.png

@@ -1,9 +1,8 @@
 class AppStrings {
   static const String appName = 'ِAlqatami';
   static const String appNameArabic = 'تطبيق القطامي';
-  static const String pexelsAPIkey = 'qfj5TKhrtcQhF6volMoUtsjtcqXwoj3KYnqfYsBGVuRoFKoYlqupIpzP';
 
-  static const String fontFamily = 'Din';
+  static const String fontFamily = 'Cairo';
   static const String noRouteFound = 'No Route Found';
   static const String cachedRandomQuote = 'CACHED_RANDOM_QUOTE';
   static const String contentType = 'Content-Type';

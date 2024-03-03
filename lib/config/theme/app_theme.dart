@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naser_alqtami/utils/app_utils/app_strings.dart';
+
 import '../../utils/app_utils/app_colors.dart';
 
 ThemeData appTheme() {
   return ThemeData(
+    useMaterial3: false,
     primaryColor: AppColors.GREY_COLOR,
     cardColor: AppColors.White_COLOR,
     scaffoldBackgroundColor: AppColors.GREY_COLOR,
@@ -21,7 +23,6 @@ ThemeData appTheme() {
     iconTheme: IconThemeData(
       size: 24.r,
       color: AppColors.DARK_BLUE_COLOR,
-      
     ),
     dividerTheme: DividerThemeData(
       thickness: 1,

@@ -28,7 +28,7 @@ class PitaqaShowFullScreenState extends State<PitaqaShowFullScreen> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.isFromDownLoads ? widget.imageIndex : widget.imageIndex - 1;
+    _currentIndex = widget.isFromDownLoads ? widget.imageIndex : widget.imageIndex ;
     _pageController = PageController();
     _pageController.addListener(() {});
     WidgetsBinding.instance.addPostFrameCallback((_) {

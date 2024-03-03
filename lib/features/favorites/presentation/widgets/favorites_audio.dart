@@ -24,7 +24,8 @@ class _FavoritesAudioState extends State<FavoritesAudio> {
   }
 
   Future<void> _loadFavorite() async {
-    final favoriteSurList = await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
+    final favoriteSurList =
+        await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
 
     setState(() => _favoritesAudio.addAll(favoriteSurList.toList()));
     Logger().e(_favoritesAudio);
@@ -33,26 +34,29 @@ class _FavoritesAudioState extends State<FavoritesAudio> {
   @override
   Widget build(BuildContext context) {
     final quranSur = BlocProvider.of<QuranSurCubit>(context).quranSur!;
-    return AnimationLimiter(
-      child: ListView.separated(
-          itemCount: _favoritesAudio.length,
-          itemBuilder: (context, index) {
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 375),
-              delay: const Duration(milliseconds: 100),
-              child: SlideAnimation(
-                verticalOffset: 50.0,
-                child: FlipAnimation(
-                  child: AudioMediaCard(
-                    allQuran: quranSur.allQuran[int.parse(_favoritesAudio[index])],
-                    index: int.parse(_favoritesAudio[index]),
-                  ),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => 8.verticalSpace),
-    );
+    return _favoritesAudio.isEmpty
+        ? const Center(child: Text("No Favorites"))
+        : AnimationLimiter(
+            child: ListView.separated(
+                itemCount: _favoritesAudio.length,
+                itemBuilder: (context, index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    delay: const Duration(milliseconds: 100),
+                    child: SlideAnimation(
+                      verticalOffset: 50.0,
+                      child: FlipAnimation(
+                        child: AudioMediaCard(
+                          allQuran: quranSur
+                              .allQuran[int.parse(_favoritesAudio[index])],
+                          index: int.parse(_favoritesAudio[index]),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => 8.verticalSpace),
+          );
   }
 }

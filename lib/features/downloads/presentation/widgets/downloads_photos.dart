@@ -25,7 +25,8 @@ class _DownloadsPhotosState extends State<DownloadsPhotos> {
   }
 
   Future<void> _loaddownloadsImages() async {
-    final downloadsImagesIDs = await Preference.getStringList(PrefKeys.downloadImageIDs) ?? {};
+    final downloadsImagesIDs =
+        await Preference.getStringList(PrefKeys.downloadImageIDs) ?? {};
     Logger().e(downloadsImagesIDs);
 
     setState(() => _downloadsImages.addAll(downloadsImagesIDs.toList()));
@@ -35,50 +36,53 @@ class _DownloadsPhotosState extends State<DownloadsPhotos> {
   Widget build(BuildContext context) {
     BlocProvider.of<QuranSurCubit>(context).quranSur;
 
-    return AnimationLimiter(
-      child: GridView.builder(
-        itemCount: _downloadsImages.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.65,
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 16,
-        ),
-        itemBuilder: (context, index) {
-          return AnimationConfiguration.staggeredGrid(
-            position: index,
-            duration: const Duration(milliseconds: 375),
-            columnCount: 2,
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    RegExp regExp = RegExp(r'\d+');
-                    Iterable<RegExpMatch>? matches = regExp.allMatches(_downloadsImages[index]);
-                    Match lastMatch = matches.last;
-                    String imageIndex2 = lastMatch.group(0) ?? '';
+    return _downloadsImages.isEmpty
+        ? const Center(child: Text("No Downloads"))
+        : AnimationLimiter(
+            child: GridView.builder(
+              itemCount: _downloadsImages.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.65,
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 16,
+              ),
+              itemBuilder: (context, index) {
+                return AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 375),
+                  columnCount: 2,
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          RegExp regExp = RegExp(r'\d+');
+                          Iterable<RegExpMatch>? matches =
+                              regExp.allMatches(_downloadsImages[index]);
+                          Match lastMatch = matches.last;
+                          String imageIndex2 = lastMatch.group(0) ?? '';
 
-                    Logger().i('imageIndex2: $imageIndex2');
+                          Logger().i('imageIndex2: $imageIndex2');
 
-                    //return Placeholder();
-                    return PitaqaShowFullScreen(
-                      imageIndex: int.parse(imageIndex2),
-                      listLength: 1,
+                          //return Placeholder();
+                          return PitaqaShowFullScreen(
+                            imageIndex: int.parse(imageIndex2),
+                            listLength: 1,
+                            isFromDownLoads: true,
+                            filesPaths: _downloadsImages,
+                          );
+                        },
+                      ),
+                    ),
+                    child: PitaqaItem(
+                      imageID: _downloadsImages[index],
                       isFromDownLoads: true,
-                      filesPaths: _downloadsImages,
-                    );
-                  },
-                ),
-              ),
-              child: PitaqaItem(
-                imageID: _downloadsImages[index],
-                isFromDownLoads: true,
-              ),
-            ),
+                    ),
+                  ),
+                );
+              },
+            ).allPadding(8),
           );
-        },
-      ).allPadding(8),
-    );
   }
 }

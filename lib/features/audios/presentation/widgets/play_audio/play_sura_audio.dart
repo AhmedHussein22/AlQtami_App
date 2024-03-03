@@ -47,13 +47,15 @@ class PlaySuraState extends State<PlaySura> {
   }
 
   void _loadFavorite() async {
-    final favoritesSurList = await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
+    final favoritesSurList =
+        await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
     final isFavorite = favoritesSurList.contains(widget.index.toString());
     setState(() => _isFavorite = isFavorite);
   }
 
   void shareSurah(String audioId) async {
-    final String dynamicLink = await DynamicLinkHelper().createProductDynamicLink(audioId);
+    final String dynamicLink =
+        await DynamicLinkHelper().createProductDynamicLink(audioId);
     Share.share('استمع الان الي ناصر القطامى : $dynamicLink');
   }
 
@@ -98,20 +100,31 @@ class PlaySuraState extends State<PlaySura> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () => UIGlobal.showCupertinoActionSheet(context, const AudioPlayList()),
-                    icon: const Icon(Icons.format_list_bulleted_rounded, color: AppColors.White_COLOR),
+                    onPressed: () => UIGlobal.showCupertinoActionSheet(
+                        context, const AudioPlayList()),
+                    icon: const Icon(Icons.format_list_bulleted_rounded,
+                        color: AppColors.White_COLOR),
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.cloud_download_rounded, color: AppColors.White_COLOR),
+                    icon: const Icon(Icons.cloud_download_rounded,
+                        color: AppColors.White_COLOR),
                   ),
                   IconButton(
-                    onPressed: () => shareSurah("quransurah/${widget.index.toString()}"),
-                    icon: const Icon(CupertinoIcons.share_up, color: AppColors.White_COLOR),
+                    onPressed: () =>
+                        shareSurah("quransurah/${widget.index.toString()}"),
+                    icon: const Icon(CupertinoIcons.share_up,
+                        color: AppColors.White_COLOR),
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.White_COLOR),
+                    icon: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: AppColors.White_COLOR,
+                      textDirection: !AppLocalizations.of(context)!.isEnLocale
+                          ? TextDirection.ltr
+                          : TextDirection.rtl,
+                    ),
                   ),
                 ],
               ),
@@ -147,7 +160,8 @@ class Playlist extends StatelessWidget {
 class TitleAndActionsButtons extends StatefulWidget {
   bool isFav;
   final int index;
-  TitleAndActionsButtons({Key? key, required this.isFav, required this.index}) : super(key: key);
+  TitleAndActionsButtons({Key? key, required this.isFav, required this.index})
+      : super(key: key);
 
   @override
   State<TitleAndActionsButtons> createState() => _TitleAndActionsButtonsState();
@@ -155,7 +169,8 @@ class TitleAndActionsButtons extends StatefulWidget {
 
 class _TitleAndActionsButtonsState extends State<TitleAndActionsButtons> {
   void _toggleFavorite() async {
-    final favoritesSurList = await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
+    final favoritesSurList =
+        await Preference.getStringList(PrefKeys.favoriteSurList) ?? {};
     if (widget.isFav) {
       favoritesSurList.remove(widget.index.toString());
       UIGlobal.showToast(msg: tr(context, "removefavours"));
@@ -163,7 +178,8 @@ class _TitleAndActionsButtonsState extends State<TitleAndActionsButtons> {
       favoritesSurList.add(widget.index.toString());
       UIGlobal.showToast(msg: tr(context, "addfavours"));
     }
-    Preference.setStringList(PrefKeys.favoriteSurList, favoritesSurList.toList());
+    Preference.setStringList(
+        PrefKeys.favoriteSurList, favoritesSurList.toList());
     setState(() => widget.isFav = !widget.isFav);
   }
 
@@ -179,19 +195,27 @@ class _TitleAndActionsButtonsState extends State<TitleAndActionsButtons> {
           children: [
             Text.rich(
               TextSpan(
-                text: "${quranSur!.allQuran[int.parse(index) - 1].titleAr} | ${quranSur.allQuran[int.parse(index) - 1].title}\n",
-                style: context.titleMediumS1.copyWith(color: AppColors.White_COLOR),
+                text:
+                    "${quranSur!.allQuran[int.parse(index) - 1].titleAr} | ${quranSur.allQuran[int.parse(index) - 1].title}\n",
+                style: context.titleMediumS1
+                    .copyWith(color: AppColors.White_COLOR),
                 children: [
                   TextSpan(
                     text: "ناصر القطامى",
-                    style: context.titleMediumS1.copyWith(color: AppColors.White_COLOR.withOpacity(0.6), fontSize: 14.sp),
+                    style: context.titleMediumS1.copyWith(
+                        color: AppColors.White_COLOR.withOpacity(0.6),
+                        fontSize: 14.sp),
                   )
                 ],
               ),
             ),
             IconButton(
               onPressed: _toggleFavorite,
-              icon: widget.isFav ? const Icon(CupertinoIcons.heart_fill, color: AppColors.RED_COLOR) : const Icon(CupertinoIcons.heart, color: AppColors.White_COLOR),
+              icon: widget.isFav
+                  ? const Icon(CupertinoIcons.heart_fill,
+                      color: AppColors.RED_COLOR)
+                  : const Icon(CupertinoIcons.heart,
+                      color: AppColors.White_COLOR),
             )
           ],
         );
@@ -255,7 +279,8 @@ class AudioProgressBar extends StatelessWidget {
           bufferedBarColor: AppColors.White_COLOR.withOpacity(0.4),
           progressBarColor: AppColors.White_COLOR,
           thumbColor: AppColors.White_COLOR,
-          timeLabelTextStyle: context.titleMediumS1.copyWith(color: AppColors.White_COLOR.withOpacity(0.5)),
+          timeLabelTextStyle: context.titleMediumS1
+              .copyWith(color: AppColors.White_COLOR.withOpacity(0.5)),
         );
       },
     );
@@ -294,7 +319,8 @@ class RepeatButton extends StatelessWidget {
         Icon icon;
         switch (value) {
           case RepeatState.off:
-            icon = Icon(CupertinoIcons.repeat, color: AppColors.White_COLOR.withOpacity(0.4));
+            icon = Icon(CupertinoIcons.repeat,
+                color: AppColors.White_COLOR.withOpacity(0.4));
             break;
           case RepeatState.repeatSong:
             icon = const Icon(CupertinoIcons.repeat_1);
@@ -322,7 +348,11 @@ class PreviousSongButton extends StatelessWidget {
       valueListenable: pageManager.isFirstSongNotifier,
       builder: (_, isFirst, __) {
         return IconButton(
-          icon: Icon(CupertinoIcons.backward_end_fill, color: isFirst ? AppColors.White_COLOR.withOpacity(0.4) : AppColors.White_COLOR, size: 1.sw > 600 ? 35 : 22),
+          icon: Icon(CupertinoIcons.backward_end_fill,
+              color: isFirst
+                  ? AppColors.White_COLOR.withOpacity(0.4)
+                  : AppColors.White_COLOR,
+              size: 1.sw > 600 ? 35 : 22),
           onPressed: (isFirst) ? null : pageManager.previous,
         );
       },
@@ -340,20 +370,23 @@ class PlayButton extends StatelessWidget {
       builder: (_, value, __) {
         switch (value) {
           case ButtonState.loading:
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 8.0.w),
-              width: 32.0.r,
-              height: 32.0.r,
-              child: const CircularProgressIndicator(color: AppColors.White_COLOR),
-            );
-          case ButtonState.paused:
             return CircleAvatar(
               radius: 1.sw > 600 ? 30 : 28,
               backgroundColor: AppColors.White_COLOR.withOpacity(0.4),
-              child: IconButton(
-                icon: Icon(Icons.play_arrow_rounded, color: AppColors.White_COLOR, size: 1.sw > 600 ? 45 : 40),
-                padding: EdgeInsets.zero,
-                onPressed: pageManager.play,
+              child:
+                  const CircularProgressIndicator(color: AppColors.White_COLOR),
+            );
+          case ButtonState.paused:
+            return SizedBox(
+              child: CircleAvatar(
+                radius: 1.sw > 600 ? 30 : 28,
+                backgroundColor: AppColors.White_COLOR.withOpacity(0.4),
+                child: IconButton(
+                  icon: Icon(Icons.play_arrow_rounded,
+                      color: AppColors.White_COLOR, size: 1.sw > 600 ? 45 : 40),
+                  padding: EdgeInsets.zero,
+                  onPressed: pageManager.play,
+                ),
               ),
             );
           case ButtonState.playing:
@@ -361,7 +394,8 @@ class PlayButton extends StatelessWidget {
               radius: 1.sw > 600 ? 30 : 28,
               backgroundColor: AppColors.White_COLOR.withOpacity(0.4),
               child: IconButton(
-                icon: Icon(Icons.pause_rounded, color: AppColors.White_COLOR, size: 1.sw > 600 ? 45 : 40),
+                icon: Icon(Icons.pause_rounded,
+                    color: AppColors.White_COLOR, size: 1.sw > 600 ? 45 : 40),
                 padding: EdgeInsets.zero,
                 onPressed: pageManager.pause,
               ),
@@ -381,7 +415,11 @@ class NextSongButton extends StatelessWidget {
       valueListenable: pageManager.isLastSongNotifier,
       builder: (_, isLast, __) {
         return IconButton(
-          icon: Icon(CupertinoIcons.forward_end_fill, color: isLast ? AppColors.White_COLOR.withOpacity(0.4) : AppColors.White_COLOR, size: 1.sw > 600 ? 35 : 22),
+          icon: Icon(CupertinoIcons.forward_end_fill,
+              color: isLast
+                  ? AppColors.White_COLOR.withOpacity(0.4)
+                  : AppColors.White_COLOR,
+              size: 1.sw > 600 ? 35 : 22),
           onPressed: (isLast) ? null : pageManager.next,
         );
       },
@@ -398,7 +436,10 @@ class ShuffleButton extends StatelessWidget {
       valueListenable: pageManager.isShuffleModeEnabledNotifier,
       builder: (context, isEnabled, child) {
         return IconButton(
-          icon: (isEnabled) ? const Icon(CupertinoIcons.shuffle, color: AppColors.White_COLOR) : Icon(CupertinoIcons.shuffle, color: AppColors.White_COLOR.withOpacity(0.4)),
+          icon: (isEnabled)
+              ? const Icon(CupertinoIcons.shuffle, color: AppColors.White_COLOR)
+              : Icon(CupertinoIcons.shuffle,
+                  color: AppColors.White_COLOR.withOpacity(0.4)),
           onPressed: pageManager.shuffle,
         );
       },

@@ -23,50 +23,52 @@ class _FavoritesPhotosState extends State<FavoritesPhotos> {
     super.initState();
     _loadFavorite();
   }
-  
+
   Future<void> _loadFavorite() async {
-    final favoriteImageIDs = await Preference.getStringList(PrefKeys.favoriteImageIDs) ?? {};
+    final favoriteImageIDs =
+        await Preference.getStringList(PrefKeys.favoriteImageIDs) ?? {};
     Logger().e(favoriteImageIDs);
     setState(() => _favoritesImage.addAll(favoriteImageIDs.toList()));
-
-   
   }
 
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<QuranSurCubit>(context).quranSur;
 
-    return AnimationLimiter(
-      child: GridView.builder(
-        itemCount: _favoritesImage.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.65,
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 16,
-        ),
-        itemBuilder: (context, index) {
-          return AnimationConfiguration.staggeredGrid(
-            position: index,
-            duration: const Duration(milliseconds: 375),
-            columnCount: 2,
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PitaqaShowFullScreen(
-                    imageIndex: int.parse(_favoritesImage[index].replaceAll("0", '')),
-                    listLength: 1,
+    return _favoritesImage.isEmpty
+        ? const Center(child: Text("No Favorites"))
+        : AnimationLimiter(
+            child: GridView.builder(
+              itemCount: _favoritesImage.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.65,
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 16,
+              ),
+              itemBuilder: (context, index) {
+                return AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 375),
+                  columnCount: 2,
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PitaqaShowFullScreen(
+                          imageIndex: int.parse(
+                              _favoritesImage[index].replaceAll("0", '')),
+                          listLength: 1,
+                        ),
+                      ),
+                    ),
+                    child: PitaqaItem(
+                      imageID: _favoritesImage[index],
+                    ),
                   ),
-                ),
-              ),
-              child: PitaqaItem(
-                imageID: _favoritesImage[index],
-              ),
-            ),
+                );
+              },
+            ).allPadding(8),
           );
-        },
-      ).allPadding(8),
-    );
   }
 }

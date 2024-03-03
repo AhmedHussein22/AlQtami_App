@@ -24,7 +24,8 @@ class _DownloadsAudioState extends State<DownloadsAudio> {
   }
 
   Future<void> _loadDownloads() async {
-    final loadDownloadsSurList = await Preference.getStringList(PrefKeys.downloadSurListPaths) ?? {};
+    final loadDownloadsSurList =
+        await Preference.getStringList(PrefKeys.downloadSurListPaths) ?? {};
     setState(() => _downloadsAudio.addAll(loadDownloadsSurList.toList()));
     Logger().e(_downloadsAudio);
   }
@@ -32,33 +33,36 @@ class _DownloadsAudioState extends State<DownloadsAudio> {
   @override
   Widget build(BuildContext context) {
     final quranSur = BlocProvider.of<QuranSurCubit>(context).quranSur!;
-    return AnimationLimiter(
-      child: ListView.separated(
-          itemCount: _downloadsAudio.length,
-          itemBuilder: (context, index) {
-            RegExp regExp = RegExp(r'(\d+)\.mp3$');
-            Match? match = regExp.firstMatch(_downloadsAudio[index]);
+    return _downloadsAudio.isEmpty
+        ? const Center(child: Text("No Downloads"))
+        : AnimationLimiter(
+            child: ListView.separated(
+                itemCount: _downloadsAudio.length,
+                itemBuilder: (context, index) {
+                  RegExp regExp = RegExp(r'(\d+)\.mp3$');
+                  Match? match = regExp.firstMatch(_downloadsAudio[index]);
 
-            String audioIndex = match!.group(1) ?? '0';
-            Logger().d("audioIndexaudioIndexaudioIndex $audioIndex");
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 375),
-              delay: const Duration(milliseconds: 100),
-              child: SlideAnimation(
-                verticalOffset: 50.0,
-                child: FlipAnimation(
-                  child: AudioMediaCard(
-                    allQuran: quranSur.allQuran[int.parse(audioIndex) - 1],
-                    index: int.parse(audioIndex) - 1,
-                    audioPath: _downloadsAudio[index],
-                    isFromDonloads: true,
-                  ),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => 8.verticalSpace),
-    );
+                  String audioIndex = match!.group(1) ?? '0';
+                  Logger().d("audioIndexaudioIndexaudioIndex $audioIndex");
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    delay: const Duration(milliseconds: 100),
+                    child: SlideAnimation(
+                      verticalOffset: 50.0,
+                      child: FlipAnimation(
+                        child: AudioMediaCard(
+                          allQuran:
+                              quranSur.allQuran[int.parse(audioIndex) - 1],
+                          index: int.parse(audioIndex) - 1,
+                          audioPath: _downloadsAudio[index],
+                          isFromDonloads: true,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => 8.verticalSpace),
+          );
   }
 }

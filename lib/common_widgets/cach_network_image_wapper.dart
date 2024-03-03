@@ -10,18 +10,25 @@ class CachNetworkImageWapper extends StatelessWidget {
   final BoxFit? fit;
   final double? width;
   final double? hight;
-  const CachNetworkImageWapper({super.key, this.error, required this.url, this.loader, this.fit, this.width, this.hight});
+  const CachNetworkImageWapper(
+      {super.key,
+      this.error,
+      required this.url,
+      this.loader,
+      this.fit,
+      this.width,
+      this.hight});
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url,
-      fit: fit?? BoxFit.cover,
+      fit: fit ?? BoxFit.cover,
       width: width,
       height: hight,
-      
       placeholder: (context, url) => loader ?? UIGlobal.iPhoneLoading(context),
-      errorWidget: (context, url, error) => error ?? Image.asset(ImagesPaths.intro2),
+      errorWidget: (context, url, error) =>
+          Image.asset(ImagesPaths.intro2) as Widget,
     );
   }
 }
