@@ -62,8 +62,7 @@ class QuranRadioState extends State<QuranRadio> {
   }
 
   void shareSurah(String audioId) async {
-    final String dynamicLink =
-        await DynamicLinkHelper().createProductDynamicLink(audioId);
+    final String dynamicLink = await DynamicLinkHelper().createProductDynamicLink(audioId);
     Share.share('استمع الان الي راديو ناصر القطامى : $dynamicLink');
   }
 
@@ -109,17 +108,14 @@ class QuranRadioState extends State<QuranRadio> {
                 children: [
                   IconButton(
                     onPressed: () => shareSurah("Alqtami_Radio"),
-                    icon: const Icon(CupertinoIcons.share_up,
-                        color: AppColors.White_COLOR),
+                    icon: const Icon(CupertinoIcons.share_up, color: AppColors.White_COLOR),
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
                     icon: Icon(
                       Icons.arrow_back_ios_new_rounded,
                       color: AppColors.White_COLOR,
-                      textDirection: !AppLocalizations.of(context)!.isEnLocale
-                          ? TextDirection.ltr
-                          : TextDirection.rtl,
+                      textDirection: !AppLocalizations.of(context)!.isEnLocale ? TextDirection.ltr : TextDirection.rtl,
                     ),
                   ),
                 ],
@@ -134,14 +130,11 @@ class QuranRadioState extends State<QuranRadio> {
                 Text.rich(
                   TextSpan(
                     text: " راديو القطامي | Radio AlQatami\n",
-                    style: context.titleMediumS1
-                        .copyWith(color: AppColors.White_COLOR),
+                    style: context.titleMediumS1.copyWith(color: AppColors.White_COLOR),
                     children: [
                       TextSpan(
                         text: "ناصر القطامى",
-                        style: context.titleMediumS1.copyWith(
-                            color: AppColors.White_COLOR.withOpacity(0.6),
-                            fontSize: 14.sp),
+                        style: context.titleMediumS1.copyWith(color: AppColors.White_COLOR.withOpacity(0.6), fontSize: 14.sp),
                       )
                     ],
                   ),
@@ -156,30 +149,20 @@ class QuranRadioState extends State<QuranRadio> {
                         final playing = playerState?.playing ?? false;
 
                         // Show a loading icon if the audio is being loaded.
-                        if (processingState ==
-                                just_audio.ProcessingState.loading ||
-                            processingState ==
-                                just_audio.ProcessingState.buffering) {
+                        if (processingState == just_audio.ProcessingState.loading || processingState == just_audio.ProcessingState.buffering) {
                           return Container(
                             margin: EdgeInsets.symmetric(horizontal: 8.0.w),
                             width: 32.0.r,
                             height: 32.0.r,
-                            child: const CircularProgressIndicator(
-                                color: AppColors.White_COLOR),
+                            child: const CircularProgressIndicator(color: AppColors.White_COLOR),
                           );
                         }
                         return CircleAvatar(
                           radius: 1.sw > 600 ? 60 : 55,
-                          backgroundColor:
-                              AppColors.White_COLOR.withOpacity(0.4),
+                          backgroundColor: AppColors.White_COLOR.withOpacity(0.4),
                           child: Center(
                             child: IconButton(
-                              icon: Icon(
-                                  !playing
-                                      ? Icons.play_arrow_rounded
-                                      : Icons.pause_rounded,
-                                  color: AppColors.White_COLOR,
-                                  size: 1.sw > 600 ? 55 : 50),
+                              icon: Icon(!playing ? Icons.play_arrow_rounded : Icons.pause_rounded, color: AppColors.White_COLOR, size: 1.sw > 600 ? 55 : 50),
                               padding: EdgeInsets.zero,
                               onPressed: togglePlayback,
                             ),
@@ -191,8 +174,7 @@ class QuranRadioState extends State<QuranRadio> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(CupertinoIcons.volume_down,
-                        color: AppColors.White_COLOR),
+                    const Icon(CupertinoIcons.volume_down, color: AppColors.White_COLOR),
                     Expanded(
                       child: Slider(
                         value: _volume,
@@ -204,8 +186,10 @@ class QuranRadioState extends State<QuranRadio> {
                         onChanged: _onVolumeChanged,
                       ),
                     ),
-                    const Icon(CupertinoIcons.volume_up,
-                        color: AppColors.White_COLOR),
+                    const Icon(
+                      CupertinoIcons.volume_up,
+                      color: AppColors.White_COLOR,
+                    ),
                   ],
                 ),
                 0.073.sh.verticalSpace,
