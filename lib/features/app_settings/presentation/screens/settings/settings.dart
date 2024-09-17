@@ -63,6 +63,8 @@ class Settings extends StatelessWidget {
                 Navigator.pushNamed(context, '/CallUs');
               },
             ),
+
+            
             CustomListTile(
               title: tr(context, "Privacy_policy"),
               onTap: () {
